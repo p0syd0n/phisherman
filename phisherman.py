@@ -1,21 +1,42 @@
 import requests
 import re
 from colorama import Fore
+from bs4 import BeautifulSoup as bs
+import os
+os.system('clear')
 print('''
-        _     _     _                                     
-       | |   (_)   | |                                    
-  _ __ | |__  _ ___| |__   ___ _ __ _ __ ___   __ _ _ __  
- | '_ \| '_ \| / __| '_ \ / _ \ '__| '_ ` _ \ / _` | '_ \ 
- | |_) | | | | \__ \ | | |  __/ |  | | | | | | (_| | | | |
- | .__/|_| |_|_|___/_| |_|\___|_|  |_| |_| |_|\__,_|_| |_|
- | |                                                      
- |_|           
+█▀█ █░█ █ █▀ █░█ █▀▀ █▀█ █▀▄▀█ ▄▀█ █▄░█
+█▀▀ █▀█ █ ▄█ █▀█ ██▄ █▀▄ █░▀░█ █▀█ █░▀█
 ''')
-url=input('>> ')
+print("made by p0syd0n")
+
+url=input('url>> ')
 parameter = "action=\""
+print(f"reviced url{url}")
+# css_files = []
+# for css in soup.find_all("link"):
+#     if css.attrs.get("href"):
+#         # if the link tag has the 'href' attribute
+#         css_url = urljoin(url, css.attrs.get("href"))
+#         css_files.append(css_url)
+# print(css_files)
+
+
+# session = requests.Session()
+# session.headers["User-Agent"] = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36"
+
+# # get the HTML content
+# html = session.get(url).content
+
+# # parse HTML using beautiful soup
+# soup = bs(html, "html.parser")
+# print(soup)
+
+
 try:
   r = requests.get(url)
   print(Fore.GREEN + f"[+] Got url {url}")
+  print(r.text)
 except Exception as e:
   print(Fore.RED + f"[-] Error getting url {url}. Show full error? y/n")
   if input(">> ") == "y":
@@ -56,7 +77,7 @@ if choice == 't' :
   if parameter in r.text:
     print("parameter detected")
     
-    with open('index.txt', 'w') as source_code:
+    with open('index.txt', "w") as source_code:
       print(r.text.index(parameter)) 
       source_code.write(re.sub(f'{parameter}?(.*?)\"', "action=\"post.php\"", r.text, flags=re.DOTALL))
       source_code.close()
@@ -82,3 +103,6 @@ else:
     
 
 
+#https://tests.posydon.repl.co
+
+#phone died
